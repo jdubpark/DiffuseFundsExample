@@ -1,8 +1,6 @@
 import UniswapV2Router02_ABI from '../abis/UniswapV2Router02.json'
 import ERC20_ABI from '../abis/ERC20.json'
 
-export const ALCHEMY_API_KEY = process.env.REACT_APP_ALCHEMY_API_KEY
-
 // Polygon mainnet
 export const ADDRESS = {
   WALLET: '0x008062acA356B5F93F2F14b71Fd73db91A606d0C',
