@@ -44,10 +44,12 @@ module.exports = {
     'no-unused-vars': 'warn',
     // typescripts
     'import/extensions': 1,
+    'import/prefer-default-export': 0,
     'import/no-named-as-default': 0,
 
     '@typescript-eslint/semi': 0,
     '@typescript-eslint/strict-boolean-expressions': 0,
     '@typescript-eslint/explicit-module-boundary-types': 0,
+    '@typescript-eslint/no-floating-promises': 0,
   },
 }
