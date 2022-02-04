@@ -1,7 +1,7 @@
 import {
   constants, utils, Contract, ContractInterface,
 } from 'ethers'
-import { JsonRpcSigner, AlchemyProvider } from '@ethersproject/providers'
+import { JsonRpcSigner, JsonRpcProvider } from '@ethersproject/providers'
 
 export function isAddress(value: string): string | false {
   try {
@@ -11,16 +11,16 @@ export function isAddress(value: string): string | false {
   }
 }
 
-export function getSigner(library: AlchemyProvider, account: string): JsonRpcSigner {
+export function getSigner(library: JsonRpcProvider, account: string): JsonRpcSigner {
   return library.getSigner(account).connectUnchecked()
 }
 
 // account is optional
-export function getProviderOrSigner(library: AlchemyProvider, account?: string): AlchemyProvider | JsonRpcSigner {
+export function getProviderOrSigner(library: JsonRpcProvider, account?: string): JsonRpcProvider | JsonRpcSigner {
   return account ? getSigner(library, account) : library
 }
 
-export function getContract(address: string, ABI: ContractInterface, library: AlchemyProvider, account?: string): Contract {
+export function getContract(address: string, ABI: ContractInterface, library: JsonRpcProvider, account?: string): Contract {
   if (!isAddress(address) || address === constants.AddressZero) {
     throw Error(`Invalid 'address' parameter '${address}'.`)
   }

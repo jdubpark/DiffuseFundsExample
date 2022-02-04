@@ -35,9 +35,16 @@ function getBestQuote(token: string, quotes: Record<string, string>): [string, n
 }
 
 function App() {
-  const provider: providers.AlchemyProvider | undefined = useProvider()
+  const provider: providers.JsonRpcProvider | undefined = useProvider()
   const balances: TokenBalances = useERC20Balances(ADDRESS.WALLET, provider)
+  const [block, setBlock] = useState<number>(0)
   // console.log(balances)
+
+  if (provider) {
+    provider.on('block', (blockNumber: number) => {
+      setBlock(blockNumber)
+    })
+  }
 
   const quotes: Record<string, Record<string, string>> = {
     SHI3LD: {
@@ -74,6 +81,9 @@ function App() {
           <div className="text-slate-500 font-semibold">
             <span>Made by&nbsp;</span>
             <a className="text-orange-500 opacity-80 hover:opacity-100 hover:underline transition" href="https://parkjongwon.com?ref=diffuse" target="_blank" rel="noreferrer">Jongwon Park</a>
+          </div>
+          <div className="mt-2 text-slate-500">
+            <div>{`Data is updated upon page refresh. Current block is: ${block}`}</div>
           </div>
         </section>
         <section className="py-4">

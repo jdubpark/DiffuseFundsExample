@@ -1,16 +1,18 @@
 import axios, { AxiosResponse } from 'axios'
-import { useEffect, useMemo, useState } from 'react'
+import {
+  useEffect, useMemo, useRef, useState,
+} from 'react'
 import {
   BigNumber, BigNumberish, Contract, ContractInterface, providers, utils,
 } from 'ethers'
 
 import {
-  ABI, ADDRESS, ALCHEMY_API_KEY, TOKENS,
+  ABI, ADDRESS, TOKENS,
 } from './constants'
 import { Response1Inch } from './data'
 import { getContract } from './helper'
 
-type MaybeProvider = providers.AlchemyProvider | undefined
+type MaybeProvider = providers.JsonRpcProvider | undefined
 
 interface UseERC20Addresses {
   wallet: string, // wallet address
@@ -31,10 +33,10 @@ export interface TokenBalances {
 }
 
 export function useProvider(): MaybeProvider {
-  const [provider, setProvider] = useState<providers.AlchemyProvider | undefined>()
+  const [provider, setProvider] = useState<providers.JsonRpcProvider | undefined>()
 
   useEffect(() => {
-    setProvider(new providers.AlchemyProvider('matic', ALCHEMY_API_KEY))
+    setProvider(new providers.JsonRpcProvider('https://polygon-rpc.com/', 'matic'))
   }, [])
 
   return provider
